@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: twampconfig
+data:
+  secrets.yaml: |
+    agentConfig:
+      identification:
+          agentId: ae311d23-5ca7-fake-8317-25example54a
+          authenticationToken: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhY2NlZGlhbi5jb20iLCJzdWIiOiJhcGl1c2VyQG55ZGVsbC5zZSIsImV4cCI6MTYyAksIOwKNywiYXVkIjoiIiwidG9rZW5JRCI6MTM0OCwidGVuYW50SUQiOiJjODRhZWUzNC04ODhjLTRmMDYtYmFmMy00NGZkMmNhM2JkM2UifQ.mUu5ZrsfjIWipzf5zqOpA4PUqWbu_CSWaSEmPC3wygv4
+

@@ -1,0 +1,54 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  resourceVersion: '5473163'
+  name: twamp-sender-service
+  labels:
+    io.kompose.service: twamp-sender-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: twamp-sender-service
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: twamp-sender-service
+    spec:
+      volumes:
+        - name: twamp-sender-service-claim0
+          configMap:
+            name: twampconfig
+            defaultMode: 420
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: my-actuate-container
+          env:
+            - name: AGENT_ID
+              value: f8ea0928-7edc-4ac8-9d6f-e9fc0ed36b0b
+            - name: AGENT_MANAGEMENT_PROXY
+              value: 10.11.12.13
+            - name: AGENT_MANAGEMENT_PROXY_PORT
+              value: '55777'
+          ports:
+            - containerPort: 862
+              protocol: UDP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: twamp-sender-service-claim0
+              mountPath: /run/secrets/secrets.yaml
+              subPath: secrets.yaml
+          terminationMessagePolicy: File
+          image: 'gcr.io/sky-agents/skylight-agent-actuate-docker:latest'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      hostname: my-agent-000001
+      schedulerName: default-scheduler
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
