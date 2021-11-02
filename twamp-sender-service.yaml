@@ -42,6 +42,8 @@ spec:
               subPath: secrets.yaml
           terminationMessagePolicy: File
           image: 'gcr.io/sky-agents/skylight-agent-actuate-docker:latest'
+          securityContext:
+            privileged: true
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
